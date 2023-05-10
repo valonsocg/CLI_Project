@@ -2,10 +2,10 @@ package AlonsoProjectCLI.User;
 import java.util.UUID;
 
 public class UserService {
-    private UserDAO userDao;
+    private final UserDao userDao;
 
     public UserService() {
-        this.userDao = new UserDAO();
+        this.userDao = new UserFileDataAccessService();
     }
 
     public User[] viewAllUsers(){

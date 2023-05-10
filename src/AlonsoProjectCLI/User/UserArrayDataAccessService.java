@@ -2,7 +2,7 @@ package AlonsoProjectCLI.User;
 
 import java.util.UUID;
 
-public class UserDAO {
+public class UserArrayDataAccessService implements UserDao {
     private static final User[] users;
 
     static {
@@ -14,7 +14,7 @@ public class UserDAO {
 
         };
     }
-
+        @Override
         public User[] getUsers () {
             return users;
         }

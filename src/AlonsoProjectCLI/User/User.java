@@ -54,7 +54,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "AlonsoProjectCLI.User.AlonsoProjectCLI.User{" +
+        return "{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", id=" + id +
