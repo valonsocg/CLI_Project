@@ -6,12 +6,12 @@ import AlonsoProjectCLI.Booking.BookingDAO;
 import java.util.Arrays;
 
 public class CarService {
-    private CarDAO carDAO;
-    private BookingDAO bookingDAO;
+    private final CarDAO carDAO;
+    private final BookingDAO bookingDAO;
 
-    public CarService() {
-        this.carDAO = new CarDAO();
-        this.bookingDAO = new BookingDAO();
+    public CarService(CarDAO carDAO, BookingDAO bookingDAO) {
+        this.carDAO = carDAO;
+        this.bookingDAO = bookingDAO;
     }
 
     public Car[] getAllCars() {

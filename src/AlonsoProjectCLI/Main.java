@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.UUID;
 
+import AlonsoProjectCLI.User.UserDao;
 import AlonsoProjectCLI.User.UserService;
 import AlonsoProjectCLI.Booking.*;
 
@@ -18,11 +19,12 @@ public class Main {
 
         UserArrayDataAccessService userDao = new UserArrayDataAccessService();
         CarDAO carDAO = new CarDAO();
-        BookingDAO bookingDAO = new BookingDAO();
 
-        UserService userService = new UserService();
-        CarService carService = new CarService();
-        BookingService bookingService = new BookingService();
+        BookingDAO bookingDAO = new BookingDAO();
+        CarService carService = new CarService(carDAO,bookingDAO);
+        UserService userService = new UserService(userDao);
+
+        BookingService bookingService = new BookingService(bookingDAO,carService,userService);
 
 
         while (true) {

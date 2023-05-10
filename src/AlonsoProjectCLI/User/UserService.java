@@ -4,8 +4,8 @@ import java.util.UUID;
 public class UserService {
     private final UserDao userDao;
 
-    public UserService() {
-        this.userDao = new UserFileDataAccessService();
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public User[] viewAllUsers(){

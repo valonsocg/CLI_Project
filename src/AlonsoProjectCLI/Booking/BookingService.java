@@ -10,14 +10,14 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class BookingService {
-    private UserService userService;
-    private CarService carService;
-    private BookingDAO bookingDAO;
+    private final UserService userService;
+    private final CarService carService;
+    private final BookingDAO bookingDAO;
 
-    public BookingService() {
-        this.userService = new UserService();
-        this.carService = new CarService();
-        this.bookingDAO = new BookingDAO();
+    public BookingService(BookingDAO bookingDAO, CarService carService, UserService userService) {
+        this.userService = userService;
+        this.carService = carService;
+        this.bookingDAO = bookingDAO;
     }
 
     public void bookCar(UUID userId, String regNumber, LocalDate bookingDate){
