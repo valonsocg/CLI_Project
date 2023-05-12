@@ -7,6 +7,7 @@ import AlonsoProjectCLI.User.User;
 import AlonsoProjectCLI.User.UserArrayDataAccessService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -69,7 +70,7 @@ public class Main {
                     break;
                 case "3":
                     System.out.println("View All Bookings");
-                    Booking[] allBookings = bookingService.viewAllBookings();
+                    List<Booking> allBookings = bookingService.viewAllBookings();
                     for (Booking booking : allBookings) {
                         System.out.println("Booking ID: " + booking.getBookingId());
                         System.out.println("User: " + booking.getUser().getFirstName() + " " + booking.getUser().getLastName());
@@ -81,7 +82,7 @@ public class Main {
                     break;
                 case "4":
                     System.out.println("View Available Cars");
-                    Car[] availableCars = carService.getAvailableCars();
+                    List<Car> availableCars = carService.getAvailableCars();
                     for (Car cars : availableCars) {
                         System.out.println(cars);
                     }
@@ -89,14 +90,14 @@ public class Main {
                 case "5":
                     System.out.println("View Available Electric Cars");
 
-                    Car[] availableElectricalCarsCars = carService.getAvailableElectricalCars();
+                    List<Car> availableElectricalCarsCars = carService.getAvailableElectricalCars();
                     for (Car cars : availableElectricalCarsCars) {
                         System.out.println(cars);
                     }
                     break;
                 case "6":
                     System.out.println("View all users");
-                    User[] allUsers = userService.viewAllUsers();
+                    List<User> allUsers = userService.viewAllUsers();
                     for (User users : allUsers) {
                         System.out.println(users);
                     }

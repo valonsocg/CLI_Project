@@ -7,6 +7,7 @@ import AlonsoProjectCLI.User.UserService;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class BookingService {
@@ -38,19 +39,8 @@ public class BookingService {
         System.out.println("Booking successful. Booking ID: " + booking.getBookingId());
     }
 
-    public Booking[] viewAllBookings() {
-        Booking[] bookings = bookingDAO.getBookings();
-        Booking[] validBookings = new Booking[bookings.length];
-        int index = 0;
-
-        for (Booking booking : bookings) {
-            if (booking != null) {
-                validBookings[index] = booking;
-                index++;
-            }
-        }
-
-        return Arrays.copyOf(validBookings, index);
+    public List<Booking> viewAllBookings() {
+        return bookingDAO.getBookings();
     }
 
     public void viewUserBookings(UUID userId){
@@ -60,7 +50,7 @@ public class BookingService {
             return;
         }
 
-        Booking[] bookings = bookingDAO.getBookings();
+        List<Booking> bookings = bookingDAO.getBookings();
         System.out.println("User Booked Cars:");
         for (Booking booking: bookings) {
             if(booking!=null && booking.getUser().getId().equals(userId)){

@@ -3,7 +3,9 @@ package AlonsoProjectCLI.Car;
 import AlonsoProjectCLI.Booking.Booking;
 import AlonsoProjectCLI.Booking.BookingDAO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class CarService {
     private final CarDAO carDAO;
@@ -14,7 +16,7 @@ public class CarService {
         this.bookingDAO = bookingDAO;
     }
 
-    public Car[] getAllCars() {
+    public List<Car> getAllCars() {
         return carDAO.viewAllCars();
     }
 
@@ -27,25 +29,22 @@ public class CarService {
         throw new IllegalStateException(String.format("Car with reg %s not found", regNumber));
     }
 
-    public Car[] getAvailableElectricalCars() {
-        Car[] allCars = getAvailableCars();
-        Car[] electricalCars = new Car[allCars.length];
-        int index = 0;
+    public List<Car> getAvailableElectricalCars() {
+        List<Car> allCars = getAvailableCars();
+        List<Car> electricalCars = new ArrayList<>();
         for (Car cars : allCars) {
             if (cars.getMotor().equals(Motor.ELECTRICAL)) {
-                electricalCars[index++] = cars;
+                electricalCars.add(cars);
             }
         }
-        return Arrays.copyOf(electricalCars, index);
+        return electricalCars;
     }
 
-    public Car[] getAvailableCars() {
-        Car[] allCars = getAllCars();
-        Booking[] bookings = bookingDAO.getBookings();
+    public List<Car> getAvailableCars() {
+        List<Car> allCars = getAllCars();
+        List<Booking> bookings = bookingDAO.getBookings();
 
-        Car[] availableCars = new Car[allCars.length];
-
-        int availableCarsCount = 0;
+        List<Car> availableCars = new ArrayList<>();
 
         for (Car car : allCars) {
             boolean isBooked = false;
@@ -56,11 +55,11 @@ public class CarService {
                 }
             }
             if (!isBooked) {
-                availableCars[availableCarsCount++] = car;
+                availableCars.add(car);
 
             }
         }
-        return Arrays.copyOf(availableCars, availableCarsCount);
+        return availableCars;
     }
 
     public Car getCarByRegNumber(String regNumber) {
