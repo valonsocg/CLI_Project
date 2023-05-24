@@ -5,7 +5,9 @@ import AlonsoProjectCLI.Booking.BookingDAO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CarService {
     private final CarDAO carDAO;
@@ -31,12 +33,9 @@ public class CarService {
 
     public List<Car> getAvailableElectricalCars() {
         List<Car> allCars = getAvailableCars();
-        List<Car> electricalCars = new ArrayList<>();
-        for (Car cars : allCars) {
-            if (cars.getMotor().equals(Motor.ELECTRICAL)) {
-                electricalCars.add(cars);
-            }
-        }
+        List<Car> electricalCars = allCars.stream()
+                .filter(c -> c.getMotor().equals(Motor.ELECTRICAL))
+                .collect(Collectors.toList());
         return electricalCars;
     }
 
@@ -44,21 +43,9 @@ public class CarService {
         List<Car> allCars = getAllCars();
         List<Booking> bookings = bookingDAO.getBookings();
 
-        List<Car> availableCars = new ArrayList<>();
-
-        for (Car car : allCars) {
-            boolean isBooked = false;
-            for (Booking booking : bookings) {
-                if (booking != null && booking.getCar().equals(car)) {
-                    isBooked = true;
-                    break;
-                }
-            }
-            if (!isBooked) {
-                availableCars.add(car);
-
-            }
-        }
+        List<Car> availableCars = allCars.stream()
+                .filter(car -> bookings.stream().noneMatch(booking -> booking != null && booking.getCar().equals(car)))
+                .collect(Collectors.toList());
         return availableCars;
     }
 
@@ -70,4 +57,6 @@ public class CarService {
         }
         return null;
     }
+
+
 }
