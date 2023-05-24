@@ -3,22 +3,19 @@ package AlonsoProjectCLI;
 import AlonsoProjectCLI.Car.Car;
 import AlonsoProjectCLI.Car.CarDAO;
 import AlonsoProjectCLI.Car.CarService;
-import AlonsoProjectCLI.User.User;
-import AlonsoProjectCLI.User.UserArrayDataAccessService;
+import AlonsoProjectCLI.User.*;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
-import AlonsoProjectCLI.User.UserDao;
-import AlonsoProjectCLI.User.UserService;
 import AlonsoProjectCLI.Booking.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        UserArrayDataAccessService userDao = new UserArrayDataAccessService();
+        UserFakerDataAccessService userDao = new UserFakerDataAccessService();
         CarDAO carDAO = new CarDAO();
 
         BookingDAO bookingDAO = new BookingDAO();
